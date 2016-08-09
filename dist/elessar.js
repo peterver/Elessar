@@ -356,17 +356,17 @@
                             var self = this;
                             if (ev.which !== 2 || !this.perant.options.middleClickDelete)
                                 return;
-                            self.delete();
+                            self.delete(ev);
                         },
-                        delete: function (evt) {
-                            evt.preventDefault();
-                            evt.stopPropagation();
+                        delete: function (ev) {
+                            ev.preventDefault();
+                            ev.stopPropagation();
                             if (!this.perant.options.deleteConfirmRequired) {
-                                this.perant.removeRange(this);
+                                this.perant.removeRange(this, true);
                                 return;
                             }
                             if (this.deleteConfirm) {
-                                this.perant.removeRange(this);
+                                this.perant.removeRange(this, true);
                                 clearTimeout(this.deleteTimeout);
                             } else {
                                 this.$el.addClass('elessar-delete-confirm');
