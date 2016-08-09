@@ -359,7 +359,8 @@
                             self.delete();
                         },
                         delete: function (evt) {
-                            evt.stopImmediatePropagation();
+                            evt.preventDefault();
+                            evt.stopPropagation();
                             if (!this.perant.options.deleteConfirmRequired) {
                                 this.perant.removeRange(this);
                                 return;
