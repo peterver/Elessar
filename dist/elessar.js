@@ -359,13 +359,14 @@
                             self.delete(ev);
                         },
                         delete: function (ev) {
-                            ev.stopImmediatePropagation();
+                            ev.preventDefault();
+                            ev.stopPropagation();
                             if (!this.perant.options.deleteConfirmRequired) {
-                                this.perant.removeRange(this, true);
+                                this.perant.removeRange(this);
                                 return;
                             }
                             if (this.deleteConfirm) {
-                                this.perant.removeRange(this, true);
+                                this.perant.removeRange(this);
                                 clearTimeout(this.deleteTimeout);
                             } else {
                                 this.$el.addClass('elessar-delete-confirm');
