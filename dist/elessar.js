@@ -273,6 +273,7 @@
                                 trigger: true
                             }, valOpts || {});
                             var next = this.perant.nextRange(this.$el), prev = this.perant.prevRange(this.$el), delta = range[1] - range[0], self = this;
+                            console.log(prev, next, this);
                             if (this.options.snap) {
                                 range = range.map(snap);
                                 delta = snap(delta);
@@ -286,8 +287,6 @@
                                     range[1] = next.val()[0];
                                     if (!valOpts.dontApplyDelta)
                                         range[0] = range[1] - delta;
-                                } else {
-                                    this.perant.repositionRange(this, range);
                                 }
                             }
                             if (prev && prev.val()[1] > range[0]) {
@@ -295,8 +294,6 @@
                                     range[0] = prev.val()[1];
                                     if (!valOpts.dontApplyDelta)
                                         range[1] = range[0] + delta;
-                                } else {
-                                    this.perant.repositionRange(this, range);
                                 }
                             }
                             if (range[1] >= 1) {
@@ -362,11 +359,11 @@
                             ev.preventDefault();
                             ev.stopPropagation();
                             if (!this.perant.options.deleteConfirmRequired) {
-                                this.perant.removeRange(this);
+                                this.perant.removeRange(this, false, false);
                                 return;
                             }
                             if (this.deleteConfirm) {
-                                this.perant.removeRange(this);
+                                this.perant.removeRange(this, false, false);
                                 clearTimeout(this.deleteTimeout);
                             } else {
                                 this.$el.addClass('elessar-delete-confirm');
